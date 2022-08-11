@@ -6,22 +6,43 @@
         label="Enter your name"
         label-for="input-1"
         valid-feedback="Thank you!"
-        :invalid-feedback="invalidFeedback"
-        :state="state"
       >
-        <b-form-input
-          id="input-1"
-          v-model="name"
-          :state="state"
-          trim
-        ></b-form-input>
+        <b-form-input id="input-1" v-model="name" trim></b-form-input>
+        <b-button @click="checkInput">toantd</b-button>
       </b-form-group>
     </b-card>
+    <b-link to="/123">Home page</b-link>
   </b-form>
 </template>
 
 <script lang="ts">
-export default {
+import {
+  defineComponent,
+  ref,
+  useContext,
+  useRoute,
+  getCurrentInstance
+} from '@nuxtjs/composition-api'
+export default defineComponent({
   name: 'IndexPage',
-}
+  layout: 'app',
+  setup() {
+    const contextInstance = useContext()
+    const route = useRoute()
+    const currentInstance = getCurrentInstance()
+    // const router = useRouter()
+    const name = ref('')
+    const checkInput = () => {
+      debugger
+      console.log(contextInstance)
+      console.log(currentInstance)
+    }
+    return {
+      route,
+      name,
+      checkInput,
+      contextInstance,
+    }
+  },
+})
 </script>
